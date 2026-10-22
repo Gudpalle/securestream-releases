@@ -1,5 +1,10 @@
-# SecureStream Releases
+# upskillme
 
-This public repository distributes signed SecureStream installers and updater metadata only. The application source code is maintained separately in a private repository.
+A desktop learning app for browsing courses and watching enrolled lessons.
 
-Download installers from the [Releases](https://github.com/Gudpalle/securestream-releases/releases) page.
+## Download
+
+Download the latest signed installer:
+
+- [Windows (64-bit)](https://github.com/Gudpalle/securestream-releases/releases/latest/download/upskillme_0.1.3_x64-setup.exe)
+- [macOS (Apple silicon)](https://github.com/Gudpalle/securestream-releases/releases/latest/download/upskillme_0.1.3_aarch64.dmg)
