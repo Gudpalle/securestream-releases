@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IAM Security Academy | Master Identity & Access Management</title>
+    <title>UpskillMe | Premium IT & Security Training</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -33,439 +33,594 @@
         }
     </script>
     <style>
-        /* Smooth transitions for view switching */
         .fade-in {
-            animation: fadeIn 0.4s ease-in-out;
+            animation: fadeIn 0.3s ease-out forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Custom scrollbar */
+
+        /* 1.2s Smooth slide up from 80px for titles to eliminate blank space natively */
+        .slide-up-text {
+            opacity: 0;
+            animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(80px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Staggered animation delays for syllabus items */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+
+        /* Hide scrollbar for cleaner UI but allow scroll */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <!-- 1. Top Announcement Banner -->
+    <div class="bg-gradient-to-r from-brand-700 to-indigo-700 text-white text-center py-3 px-4 text-sm font-semibold shadow-md relative z-50">
+        <span class="mr-2 text-lg">🚀</span> <span class="opacity-90">Sailpoint Help is now</span> <span class="text-white font-extrabold ml-1 tracking-wide">UpskillMe</span>
+    </div>
+
+    <!-- 2. Header (Logo Only & YouTube) -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center cursor-pointer" onclick="showMainView()">
-                    <i class="fa-solid fa-shield-halved text-brand-600 text-2xl mr-2"></i>
-                    <span class="font-bold text-xl text-gray-900 tracking-tight">IAM Academy</span>
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer group" onclick="showMainView()">
+                    <div class="bg-brand-600 text-white p-2.5 rounded-xl mr-3 shadow-md group-hover:bg-brand-700 transition-colors">
+                        <i class="fa-solid fa-graduation-cap text-xl"></i>
+                    </div>
+                    <span class="font-black text-2xl tracking-tight text-slate-900">UpskillMe</span>
                 </div>
-                <div class="hidden md:flex space-x-4">
-                    <a href="#" class="text-gray-600 hover:text-brand-600 px-3 py-2 rounded-md font-medium transition">Courses</a>
-                    <a href="#" class="text-gray-600 hover:text-brand-600 px-3 py-2 rounded-md font-medium transition">About</a>
-                    <a href="#" class="text-brand-600 font-semibold px-3 py-2 rounded-md transition">Login</a>
-                </div>
+
+                <!-- YouTube Link -->
+                <a href="https://www.youtube.com/@Sailpoint-help" target="_blank" rel="noopener noreferrer" class="flex items-center bg-red-50 hover:bg-red-100 text-red-600 font-bold px-4 py-2 rounded-xl border border-red-100 transition-all shadow-sm transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-youtube text-2xl mr-2"></i>
+                    <span class="hidden sm:inline">Our Channel</span>
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- MAIN VIEW -->
-    <div id="main-view" class="fade-in flex-grow">
+    <div id="main-view" class="fade-in flex-grow flex flex-col">
         
-        <!-- Hero Section -->
-        <section class="bg-white overflow-hidden relative">
-            <div class="absolute inset-0 bg-brand-50/50 z-0 pointer-events-none"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative z-10 text-center">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-                    Master Identity & Access Management
+        <!-- 3 & 4. Hero Section (70vh min-height, flex-centered) -->
+        <section class="bg-white border-b border-slate-200 min-h-[70vh] flex items-center relative overflow-hidden">
+            <!-- Decorative background elements -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-50 opacity-60 blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-50 opacity-60 blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 text-center py-16">
+                <h1 class="slide-up-text text-5xl md:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-tight">
+                    Elevate Your Career in <br class="hidden md:block"/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600">Identity & Security</span>
                 </h1>
-                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600 mb-8">
-                    Advance your career with industry-leading courses in Sailpoint, CyberArk, EntraID, and Okta. Learn on the go with our dedicated applications.
+                <p class="slide-up-text mt-6 max-w-2xl mx-auto text-lg md:text-xl text-slate-500 mb-12 leading-relaxed font-medium stagger-1">
+                    Master industry-leading tools with practical, hands-on courses. Download our applications to learn anywhere, anytime.
                 </p>
                 
-                <!-- Download Buttons -->
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
-                    <a href="#" class="flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 shadow-sm transition">
-                        <i class="fa-brands fa-google-play text-xl mr-3"></i>
+                <!-- App Store Buttons -->
+                <div class="slide-up-text stagger-2 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <!-- Mac OS -->
+                    <a href="https://github.com/Gudpalle/securestream-releases/releases/latest/download/upskillme_0.1.3_aarch64.dmg" target="_blank" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <i class="fa-brands fa-apple text-3xl mr-4"></i>
                         <div class="text-left">
-                            <div class="text-xs uppercase opacity-80 leading-tight">Get it on</div>
-                            <div class="font-bold leading-tight">Google Play</div>
+                            <div class="text-[10px] uppercase tracking-widest opacity-80 leading-none mb-1.5 font-semibold">Download for</div>
+                            <div class="font-bold text-base leading-none">Mac OS</div>
                         </div>
                     </a>
-                    
-                    <a href="#" class="flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition">
-                        <i class="fa-brands fa-windows text-xl mr-3"></i>
+                    <!-- Windows -->
+                    <a href="https://github.com/Gudpalle/securestream-releases/releases/latest/download/upskillme_0.1.3_x64-setup.exe" target="_blank" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <i class="fa-brands fa-windows text-2xl mr-4"></i>
                         <div class="text-left">
-                            <div class="text-xs uppercase opacity-80 leading-tight">Download for</div>
-                            <div class="font-bold leading-tight">Windows OS</div>
+                            <div class="text-[10px] uppercase tracking-widest opacity-80 leading-none mb-1.5 font-semibold">Download for</div>
+                            <div class="font-bold text-base leading-none">Windows OS</div>
                         </div>
                     </a>
-
-                    <a href="#" class="flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gray-900 hover:bg-black shadow-sm transition">
-                        <i class="fa-brands fa-apple text-2xl mr-3"></i>
+                    <!-- Android -->
+                    <a href="#" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <i class="fa-brands fa-google-play text-2xl mr-4"></i>
                         <div class="text-left">
-                            <div class="text-xs uppercase opacity-80 leading-tight">Download for</div>
-                            <div class="font-bold leading-tight">Mac OS</div>
+                            <div class="text-[10px] uppercase tracking-widest opacity-80 leading-none mb-1.5 font-semibold">Get it on</div>
+                            <div class="font-bold text-base leading-none">Android Store</div>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Courses Section -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="flex justify-between items-end mb-8">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-900">Featured Courses</h2>
-                    <p class="mt-2 text-gray-600">Comprehensive training programs for security professionals.</p>
-                </div>
+        <!-- 5 & 6. Course Grid (3-column, Strict Flex-Col heights) -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 flex-grow w-full">
+            <div class="text-center mb-16 slide-up-text stagger-1">
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">Featured Courses</h2>
+                <p class="text-slate-500 text-lg max-w-2xl mx-auto">Comprehensive curriculum designed by industry experts to make you job-ready.</p>
             </div>
 
-            <!-- Course Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8">
-                
-                <!-- Course Card 1: Sailpoint IIQ -->
-                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full group" onclick="openCourse('sailpoint')">
-                    <div class="relative h-32 bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 bg-white/10 mix-blend-overlay"></div>
-                        <span class="absolute top-3 right-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-400 text-green-900 shadow-md">
-                            <span class="w-2 h-2 rounded-full bg-green-900 mr-1.5 animate-pulse"></span> Available now
-                        </span>
-                        <i class="fa-solid fa-shield-halved text-5xl text-white/40 group-hover:scale-110 transition-transform duration-300"></i>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow relative">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">Sailpoint IIQ</h3>
-                        <p class="text-sm text-gray-500 mb-6 flex-grow line-clamp-2">Comprehensive training on Sailpoint IdentityIQ architecture, implementation, and administration.</p>
-                        
-                        <div class="space-y-3 text-sm text-gray-600 mb-6">
-                            <div class="flex items-center"><i class="fa-solid fa-list-ul w-6 text-brand-500"></i> 59 lectures</div>
-                            <div class="flex items-center"><i class="fa-regular fa-clock w-6 text-brand-500"></i> 25+ hours</div>
-                            <div class="flex items-center"><i class="fa-solid fa-infinity w-6 text-brand-500"></i> Lifetime access</div>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                            <span class="text-lg font-bold text-gray-900">$199 <span class="text-xs text-gray-400 font-normal">Fees</span></span>
-                            <span class="text-brand-600 text-sm font-semibold group-hover:translate-x-1 transition-transform inline-block">Explore <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course Card 2: CyberArk PAM -->
-                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full group" onclick="openCourse('cyberark')">
-                    <div class="relative h-32 bg-gradient-to-br from-indigo-600 to-indigo-900 flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 bg-white/10 mix-blend-overlay"></div>
-                        <span class="absolute top-3 right-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-400 text-green-900 shadow-md">
-                            <span class="w-2 h-2 rounded-full bg-green-900 mr-1.5 animate-pulse"></span> Available now
-                        </span>
-                        <i class="fa-solid fa-vault text-5xl text-white/40 group-hover:scale-110 transition-transform duration-300"></i>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow relative">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">CyberArk PAM</h3>
-                        <p class="text-sm text-gray-500 mb-6 flex-grow line-clamp-2">Master Privileged Access Management with CyberArk infrastructure and operations.</p>
-                        
-                        <div class="space-y-3 text-sm text-gray-600 mb-6">
-                            <div class="flex items-center"><i class="fa-solid fa-list-ul w-6 text-indigo-500"></i> 70+ lectures</div>
-                            <div class="flex items-center"><i class="fa-regular fa-clock w-6 text-indigo-500"></i> 20+ hours</div>
-                            <div class="flex items-center"><i class="fa-solid fa-infinity w-6 text-indigo-500"></i> Lifetime access</div>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                            <span class="text-lg font-bold text-gray-900">$249 <span class="text-xs text-gray-400 font-normal">Fees</span></span>
-                            <span class="text-indigo-600 text-sm font-semibold group-hover:translate-x-1 transition-transform inline-block">Explore <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course Card 3: Microsoft EntraID -->
-                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full group" onclick="openCourse('entraid')">
-                    <div class="relative h-32 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 bg-white/10 mix-blend-overlay"></div>
-                        <span class="absolute top-3 right-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-orange-400 text-orange-950 shadow-md">
-                            <i class="fa-regular fa-calendar mr-1.5"></i> 1st Nov
-                        </span>
-                        <i class="fa-brands fa-microsoft text-5xl text-white/40 group-hover:scale-110 transition-transform duration-300"></i>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow relative">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-slate-600 transition-colors">Microsoft EntraID</h3>
-                        <p class="text-sm text-gray-500 mb-6 flex-grow line-clamp-2">Deep dive into Microsoft's cloud-based identity and access management service.</p>
-                        
-                        <div class="space-y-3 text-sm text-gray-600 mb-6">
-                            <div class="flex items-center"><i class="fa-solid fa-list-ul w-6 text-orange-500"></i> 70+ lectures</div>
-                            <div class="flex items-center"><i class="fa-regular fa-clock w-6 text-orange-500"></i> 20+ hours</div>
-                            <div class="flex items-center"><i class="fa-solid fa-infinity w-6 text-orange-500"></i> Lifetime access</div>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                            <span class="text-lg font-bold text-gray-900">$149 <span class="text-xs text-gray-400 font-normal">Pre-order</span></span>
-                            <span class="text-slate-600 text-sm font-semibold group-hover:translate-x-1 transition-transform inline-block">Explore <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course Card 4: Okta SAML 2.0 -->
-                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full group" onclick="openCourse('okta')">
-                    <div class="relative h-32 bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 bg-white/10 mix-blend-overlay"></div>
-                        <span class="absolute top-3 right-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-orange-400 text-orange-950 shadow-md">
-                            <i class="fa-regular fa-calendar mr-1.5"></i> 1st Nov
-                        </span>
-                        <i class="fa-solid fa-network-wired text-5xl text-white/40 group-hover:scale-110 transition-transform duration-300"></i>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow relative">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Okta SAML 2.0</h3>
-                        <p class="text-sm text-gray-500 mb-6 flex-grow line-clamp-2">Learn to integrate, configure, and manage SAML 2.0 applications using Okta SSO.</p>
-                        
-                        <div class="space-y-3 text-sm text-gray-600 mb-6">
-                            <div class="flex items-center"><i class="fa-solid fa-list-ul w-6 text-orange-500"></i> 70+ lectures</div>
-                            <div class="flex items-center"><i class="fa-regular fa-clock w-6 text-orange-500"></i> 20+ hours</div>
-                            <div class="flex items-center"><i class="fa-solid fa-infinity w-6 text-orange-500"></i> Lifetime access</div>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                            <span class="text-lg font-bold text-gray-900">$149 <span class="text-xs text-gray-400 font-normal">Pre-order</span></span>
-                            <span class="text-blue-600 text-sm font-semibold group-hover:translate-x-1 transition-transform inline-block">Explore <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- Strict Grid Setup: lg:grid-cols-3 -->
+            <div id="course-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 slide-up-text stagger-2">
+                <!-- Course cards are now dynamically injected via JS -->
             </div>
         </section>
     </div>
 
-    <!-- COURSE DETAILS VIEW (Hidden by default) -->
-    <div id="course-details-view" class="hidden fade-in flex-grow bg-white">
-        
-        <!-- Details Header -->
-        <div class="bg-gray-900 text-white py-12">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <button onclick="showMainView()" class="mb-6 inline-flex items-center text-gray-300 hover:text-white transition group">
-                    <i class="fa-solid fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i> 
-                    Back to Courses
-                </button>
-                
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                    <div>
-                        <span id="detail-badge" class="inline-block mb-3 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-brand-500/20 text-brand-300 border border-brand-500/30">
-                            Status Badge
+    <!-- 7. COURSE DETAILS VIEW (Hidden initially) -->
+    <div id="course-details-view" class="hidden fade-in flex-grow bg-slate-50 flex flex-col">
+
+        <div class="bg-white border-b border-slate-200">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+                <!-- 7. TOP LEFT BACK BUTTON -->
+                <div class="flex justify-start mb-8">
+                    <button onclick="showMainView()" class="group flex items-center text-slate-600 hover:text-brand-600 font-bold bg-white px-5 py-2.5 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-all text-sm">
+                        <i class="fa-solid fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+                        Back to Courses
+                    </button>
+                </div>
+
+                <!-- Detail Header -->
+                <div class="flex flex-col lg:flex-row justify-between items-start gap-10">
+                    <div class="flex-1">
+                        <span id="detail-badge" class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider mb-5 shadow-sm border">
+                            Badge
                         </span>
-                        <h1 id="detail-title" class="text-3xl md:text-5xl font-bold mb-4">Course Title</h1>
-                        <p id="detail-desc" class="text-gray-400 text-lg max-w-2xl">Course description goes here.</p>
+                        <h1 id="detail-title" class="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight leading-tight">Course Title</h1>
+
+                        <div class="flex flex-wrap gap-6 text-slate-700 font-medium mb-6">
+                            <div class="flex items-center bg-slate-100 px-4 py-2 rounded-lg"><i class="fa-solid fa-book-open mr-2.5 text-brand-500"></i> <span id="detail-lectures"></span></div>
+                            <div class="flex items-center bg-slate-100 px-4 py-2 rounded-lg"><i class="fa-regular fa-clock mr-2.5 text-brand-500"></i> <span id="detail-duration"></span></div>
+                            <div class="flex items-center bg-slate-100 px-4 py-2 rounded-lg"><i class="fa-solid fa-infinity mr-2.5 text-brand-500"></i> Lifetime Access</div>
+                        </div>
                     </div>
-                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 min-w-[250px] shadow-lg">
-                        <div class="text-3xl font-bold mb-4 text-white" id="detail-price">$0</div>
-                        <button class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-md">
-                            Enroll Now
-                        </button>
+
+                    <!-- Detail Pricing Card -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xl w-full lg:min-w-[320px] lg:max-w-md shrink-0">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-6 mb-2">
+                            <div class="flex-1 text-center sm:text-left">
+                                <div class="text-2xl font-bold text-slate-700 mb-1" id="detail-price">₹ 4999 / $ 65</div>
+                                <p class="text-slate-500 text-sm font-medium">One-time payment, lifetime access.</p>
+                            </div>
+
+                            <!-- Dropdown Button for Enroll -->
+                            <div class="relative w-full sm:w-auto text-left" id="enroll-dropdown-container">
+                                <button onclick="toggleEnrollDropdown(event)" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-700 text-white font-bold text-lg py-3 px-6 rounded-xl transition-all shadow-md transform hover:-translate-y-0.5 flex justify-center items-center group whitespace-nowrap">
+                                    Enroll Now <i class="fa-solid fa-chevron-down ml-2 text-sm transition-transform group-hover:translate-y-0.5"></i>
+                                </button>
+                                <!-- Dropdown Menu -->
+                                <div id="enroll-dropdown" class="hidden absolute top-full left-0 right-0 sm:left-auto sm:right-0 sm:w-64 mt-3 bg-white border border-slate-200 rounded-xl shadow-xl z-50 overflow-hidden transform origin-top">
+                                    <a id="enroll-indian" href="#" target="_blank" class="block px-4 py-3.5 hover:bg-slate-50 border-b border-slate-100 text-slate-700 hover:text-brand-600 font-bold flex items-center justify-between transition-colors">
+                                        <span>Indian User (₹)</span> <i class="fa-solid fa-arrow-right text-brand-500 text-sm"></i>
+                                    </a>
+                                    <a id="enroll-intl" href="#" target="_blank" class="block px-4 py-3.5 hover:bg-slate-50 text-slate-700 hover:text-brand-600 font-bold flex items-center justify-between transition-colors">
+                                        <span>International User ($)</span> <i class="fa-solid fa-arrow-right text-brand-500 text-sm"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Meta info bar -->
-        <div class="bg-gray-50 border-b border-gray-200">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap gap-6 text-sm text-gray-600 font-medium">
-                <div class="flex items-center"><i class="fa-solid fa-list-ul mr-2 text-gray-400"></i> <span id="detail-lectures">0</span> lectures</div>
-                <div class="flex items-center"><i class="fa-regular fa-clock mr-2 text-gray-400"></i> <span id="detail-duration">0</span> hours</div>
-                <div class="flex items-center"><i class="fa-solid fa-infinity mr-2 text-gray-400"></i> Lifetime access</div>
-                <div class="flex items-center"><i class="fa-solid fa-mobile-screen mr-2 text-gray-400"></i> Access on mobile, desktop, & Mac</div>
+        <!-- 8. Syllabus Section -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Course Curriculum</h2>
             </div>
-        </div>
-
-        <!-- Syllabus Content -->
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Course Syllabus</h2>
             
-            <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden" id="syllabus-container">
-                <!-- Syllabus items injected via JS -->
+            <!-- Syllabus Container (Will be structured as a grid of cards) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="syllabus-container">
+                <!-- Syllabus injected via JS -->
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-auto">
-        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-500 text-sm mb-4 md:mb-0">
-                &copy; 2024 IAM Security Academy. All rights reserved.
-            </p>
-            <div class="flex space-x-6">
-                <a href="#" class="text-gray-400 hover:text-gray-500"><i class="fa-brands fa-linkedin text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-gray-500"><i class="fa-brands fa-twitter text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-gray-500"><i class="fa-brands fa-youtube text-xl"></i></a>
+    <footer class="bg-white border-t border-slate-200 py-10 mt-auto z-40 relative">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center text-center">
+            <div class="text-slate-500 font-medium mb-3">
+                &copy; 2026 UpskillMe Inc. All rights reserved. Master Identity Security.
+            </div>
+            <div class="text-slate-700 font-medium bg-slate-50 px-6 py-3 rounded-xl border border-slate-200 shadow-sm">
+                <i class="fa-solid fa-envelope text-brand-600 mr-2"></i> For any enquery mail us:
+                <a href="mailto:cybercourse4u@gmail.com" class="text-brand-600 hover:text-brand-800 font-bold ml-1 transition-colors">cybercourse4u@gmail.com</a>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Interactions -->
+    <!-- Logic & Data -->
     <script>
-        // Mock database of courses and their syllabus
-        const courseDatabase = {
+        // Unique pricing is set per course
+        const courseData = {
             'sailpoint': {
-                title: 'Sailpoint IIQ',
-                desc: 'Comprehensive training on Sailpoint IdentityIQ architecture, implementation, and administration for enterprise environments.',
+                title: 'Sailpoint IIQ: Basic to Advance Course',
                 status: 'Available now',
-                statusClass: 'bg-green-500/20 text-green-300 border-green-500/30',
-                price: '$199',
-                lectures: '59',
-                duration: '25+',
+                statusClass: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+                statusTextClass: 'text-emerald-700',
+                statusIcon: 'fa-solid fa-circle-check text-emerald-500',
+                cardGradient: 'from-indigo-600 to-blue-700',
+                cardIcon: 'fa-solid fa-shield-halved',
+                price: '₹ 4999 / $ 65',
+                lectures: '59 lectures',
+                duration: '25+ hours of learning',
+                enrollLinks: { indian: 'https://rzp.io/rzp/sailpointhelp', international: 'https://www.paypal.com/ncp/payment/7QB95T2S9JDKU' },
                 syllabus: [
-                    { title: "Section 1: Introduction to Identity & Access Management", lectures: [
-                        { title: "What is IAM?", duration: "15:20" },
-                        { title: "Introduction to Sailpoint IIQ", duration: "22:15" },
-                        { title: "Setting up your lab environment", duration: "45:00" }
+                    { title: "Module 1: Introduction", lectures: [
+                        {t: "1.1 Why Identity and Access Management", d: "13m 17s"}
                     ]},
-                    { title: "Section 2: Architecture & Installation", lectures: [
-                        { title: "Sailpoint IIQ Architecture Overview", duration: "30:45" },
-                        { title: "Database Setup and Configuration", duration: "28:10" },
-                        { title: "Tomcat Integration and Deployment", duration: "35:50" }
+                    { title: "Module 2: SailPoint IIQ Basics & Identity Management", lectures: [
+                        {t: "2.1 General Buzz Words", d: "13m 3s"},
+                        {t: "2.2 Installation", d: "40m 58s"},
+                        {t: "2.3 Menu Familiarize", d: "20m 52s"},
+                        {t: "2.4 Authoritative Application Onboarding", d: "11m 33s"},
+                        {t: "2.5 UIConfig", d: "52m 59s"},
+                        {t: "2.6 Identity Mapping", d: "23m 32s"},
+                        {t: "2.7 Correlation", d: "16m 9s"}
                     ]},
-                    { title: "Section 3: Identity Cubes and Onboarding", lectures: [
-                        { title: "Understanding Identity Cubes", duration: "20:00" },
-                        { title: "HR Integration (Authoritative Source)", duration: "42:15" },
-                        { title: "Correlation Rules and Logic", duration: "33:20" }
+                    { title: "Module 3: Rules & Java", lectures: [
+                        {t: "3.1 Java Docs and Filters", d: "46m 51s"},
+                        {t: "3.2 Rules", d: "14m 54s"}
                     ]},
-                    { title: "Section 4: Provisioning & Workflows", lectures: [
-                        { title: "LCM (Lifecycle Manager) Overview", duration: "25:30" },
-                        { title: "Joiner, Mover, Leaver Processes", duration: "55:10" },
-                        { title: "Customizing Workflows via XML", duration: "48:00" }
+                    { title: "Module 4: Active Directory & Provisioning", lectures: [
+                        {t: "4.1 AD as Non-Authoritative App", d: "36m 44s"},
+                        {t: "4.2 AD Account Aggregation", d: "29m 46s"},
+                        {t: "4.3 Connector Rules and Identity Mapping", d: "13m 17s"},
+                        {t: "4.4 IQService", d: "1h 55m 51s"},
+                        {t: "4.5 Feature String and Pass-Through Auth", d: "1h 27m 43s"},
+                        {t: "4.6 Group Aggregation", d: "28m 49s"},
+                        {t: "4.7 Provisioning Plan", d: "27m 6s"}
+                    ]},
+                    { title: "Module 5: Lifecycle Management & Workflows", lectures: [
+                        {t: "5.1 Manage User Access and Track Requests", d: "59m 6s"},
+                        {t: "5.2 Workflows", d: "59m 18s"},
+                        {t: "5.3 LCM Provisioning", d: "29m 24s"},
+                        {t: "5.4 Approval Assignment Rule", d: "35m 27s"},
+                        {t: "5.5 InterceptorScript and AfterScript", d: "41m 45s"},
+                        {t: "5.6 TimeMachine, Reminder and Escalation", d: "18m 50s"},
+                        {t: "5.7 Email Configuration", d: "5m 15s"}
+                    ]},
+                    { title: "Module 6: Certifications", lectures: [
+                        {t: "6.1 Understanding Certifications", d: "49m 30s"},
+                        {t: "6.2 Population and Group", d: "1h 4m 58s"},
+                        {t: "6.3 WorkGroup and Capability", d: "25m 26s"},
+                        {t: "6.4 Certification In Action", d: "14m 44s"},
+                        {t: "6.5 Certification Rules", d: "19m 48s"}
+                    ]},
+                    { title: "Module 7: Policy & Forms", lectures: [
+                        {t: "7.1 Policy", d: "9m 38s"},
+                        {t: "7.2 Form", d: "42m 6s"},
+                        {t: "7.3 QuickLinks and Transient Workflow", d: "43m 49s"}
+                    ]},
+                    { title: "Module 8: Certification Events", lectures: [
+                        {t: "8.2 Certification Event", d: "9m 38s"}
+                    ]},
+                    { title: "Module 9: Roles & RBAC", lectures: [
+                        {t: "9.1 Roles", d: "28m 45s"},
+                        {t: "9.2 Role Based Access Control", d: "51m 35s"}
+                    ]},
+                    { title: "Module 10: LifeCycle & Compliance Manager", lectures: [
+                        {t: "10.1 LifeCycle Manager and Compliance Manager", d: "12m 36s"}
+                    ]},
+                    { title: "Module 11: Account & Password Management", lectures: [
+                        {t: "11.1 Manage Accounts", d: "21m 54s"},
+                        {t: "11.2 Password Management", d: "21m 47s"},
+                        {t: "11.3 Desktop Password Reset", d: "22m 50s"},
+                        {t: "11.4 Attribute Synchronization", d: "10m 8s"},
+                        {t: "11.5 Manual Workitem for Non-Connected Application", d: "29m 35s"}
+                    ]},
+                    { title: "Module 12: Service Build", lectures: [
+                        {t: "12.1 Standard Service Build", d: "24m"}
+                    ]},
+                    { title: "Module 13: Connectors & Integration", lectures: [
+                        {t: "13.1 IntegrationConfig", d: "29m 12s"},
+                        {t: "13.2 Custom Connector", d: "52m 21s"},
+                        {t: "13.3 Custom Connector - LifeCycle Management", d: "13m 3s"}
+                    ]},
+                    { title: "Module 14: Audit, Analytics & Reports", lectures: [
+                        {t: "14.1 Audit, Analytics and Reports", d: "40m 58s"},
+                        {t: "14.2 Custom Reports", d: "1h 22m 27s"}
+                    ]},
+                    { title: "Module 15: Extended Attributes", lectures: [
+                        {t: "15.1 Account Mapping, Application and Entitlement Extended Attribute", d: "28m 14s"}
+                    ]},
+                    { title: "Module 16: Scope", lectures: [
+                        {t: "16.1 Scope", d: "1h 1m 4s"}
+                    ]},
+                    { title: "Module 17: REST API", lectures: [
+                        {t: "17.1 OOTB and Custom REST", d: "20m 39s"}
+                    ]},
+                    { title: "Module 18: Plugin Development", lectures: [
+                        {t: "18.1 Plugin Understanding", d: "45m 20s"},
+                        {t: "18.2 Plugin Development", d: "59m 49s"}
+                    ]},
+                    { title: "Module 19: ServiceNow & Salesforce / Okta Connectors", lectures: [
+                        {t: "19.1 ServiceNow Connector", d: "26m 30s"},
+                        {t: "19.2 ServiceNow Ticket Raise", d: "26m 51s"},
+                        {t: "19.3 Salesforce Connector", d: "18m 30s"},
+                        {t: "19.4 Okta Connector", d: "12m 11s"}
+                    ]},
+                    { title: "Module 20: Certificates & SSO", lectures: [
+                        {t: "20.1 Self Signed Certificate", d: "6m 36s"},
+                        {t: "20.2 SSO by Okta", d: "30m 11s"},
+                        {t: "20.3 SSO by Rule", d: "10m 39s"}
                     ]}
                 ]
             },
             'cyberark': {
                 title: 'CyberArk PAM',
-                desc: 'Master Privileged Access Management with CyberArk infrastructure, operations, and security best practices.',
                 status: 'Available now',
-                statusClass: 'bg-green-500/20 text-green-300 border-green-500/30',
-                price: '$249',
-                lectures: '70+',
-                duration: '20+',
+                statusClass: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+                statusTextClass: 'text-emerald-700',
+                statusIcon: 'fa-solid fa-circle-check text-emerald-500',
+                cardGradient: 'from-slate-700 to-slate-900',
+                cardIcon: 'fa-solid fa-vault',
+                price: '₹ 4999 / $ 65',
+                lectures: '74 lessons',
+                duration: '6+ hours of learning',
+                enrollLinks: { indian: 'https://rzp.io/rzp/cyberark', international: 'https://www.paypal.com/ncp/payment/A6VURTL7VNF8L' },
                 syllabus: [
-                    { title: "Section 1: PAM Fundamentals", lectures: [
-                        { title: "The Need for Privileged Access Management", duration: "18:45" },
-                        { title: "CyberArk Component Overview (EPV, CPM, PVWA, PSM)", duration: "35:10" }
-                    ]},
-                    { title: "Section 2: Enterprise Password Vault (EPV)", lectures: [
-                        { title: "Vault Installation & Hardening", duration: "50:00" },
-                        { title: "Safe Management and Permissions", duration: "40:20" },
-                        { title: "High Availability Overview", duration: "25:30" }
-                    ]},
-                    { title: "Section 3: Central Policy Manager (CPM)", lectures: [
-                        { title: "Configuring Platforms and Plugins", duration: "45:15" },
-                        { title: "Automatic Password Rotation", duration: "32:10" },
-                        { title: "Troubleshooting CPM Errors", duration: "38:40" }
-                    ]}
+                    { title: "Module 1: Getting Started", lectures: [
+                        {t: "Agenda", d: "2:14"},
+                        {t: "Course Introduction", d: "1:32"},
+                        {t: "What Is Identity and Access Management (IAM)? — Part 1", d: "4:46"},
+                        {t: "What Is Identity and Access Management (IAM)? — Part 2", d: "9:04"},
+                        {t: "What Is Identity and Access Management (IAM)? — Part 3", d: "4:40"},
+                        {t: "What is Privileged Access Management (PAM) ? (1/2)", d: "8:38"},
+                        {t: "What is Privileged Access Management (PAM) ? (2/2)", d: "10:28"},
+                        {t: "Main End Users of PAM", d: "4:52"}
+                    ] },
+                    { title: "Module 2: CyberArk Components & Architecture", lectures: [
+                        {t: "Components & Architecture Introduction", d: "1:39"},
+                        {t: "LAB : First Connection (1/2)", d: "8:29"},
+                        {t: "Lab: First Connection — Part 2", d: "5:29"},
+                        {t: "Main Components of CyberArk", d: "2:32"},
+                        {t: "The Digital Vault", d: "4:31"},
+                        {t: "The Disaster Recovery Vault", d: "3:35"},
+                        {t: "Password Vault Web Access (PVWA)", d: "2:57"},
+                        {t: "Privileged Session Manager (PSM)", d: "7:06"},
+                        {t: "Central Policy Manager (CPM)", d: "4:16"},
+                        {t: "Privileged Threat Analytics (PTA)", d: "3:24"}
+                    ] },
+                    { title: "Module 3: Objects & Permissions", lectures: [
+                        {t: "Objects Introduction", d: "1:39"},
+                        {t: "The Master Policy", d: "2:09"},
+                        {t: "Lab: First Look at the Master Policy — Part 1", d: "8:00"},
+                        {t: "Lab: First Look at the Master Policy — Part 2", d: "4:45"},
+                        {t: "The Platform", d: "4:30"},
+                        {t: "Lab: First Look at a Platform — Part 1", d: "7:54"},
+                        {t: "Lab: First Look at a Platform — Part 2", d: "6:53"},
+                        {t: "The Safe", d: "3:41"},
+                        {t: "Safe Design — Part 1", d: "5:58"},
+                        {t: "Safe Design — Part 2", d: "7:28"},
+                        {t: "Safe Design — Part 3: Naming Convention", d: "7:18"},
+                        {t: "Safe Design — Part 4: Naming Convention", d: "4:10"},
+                        {t: "Safe Design — Part 5: Permissions", d: "5:26"},
+                        {t: "Safe Design — Part 6: Permissions", d: "8:49"},
+                        {t: "The Account — Part 1", d: "5:18"},
+                        {t: "The Account — Part 2", d: "4:26"},
+                        {t: "Lab: Safe Creation & Permissions", d: "9:16"},
+                        {t: "Part 3 Summary", d: "2:12"}
+                    ] },
+                    { title: "Module 4: Main Capabilities", lectures: [
+                        {t: "Introduction to PAM Capabilities (Framework)", d: "2:52"}
+                    ] },
+                    { title: "Module 5: Credential Management", lectures: [
+                        {t: "Credential Management Introduction", d: "1:40"},
+                        {t: "Password Policy", d: "1:57"},
+                        {t: "Password Verification", d: "3:08"},
+                        {t: "Password Rotation", d: "3:59"},
+                        {t: "Password Reconciliation", d: "3:40"},
+                        {t: "Password Complexity", d: "3:03"},
+                        {t: "LAB : Master & Platform password policy", d: "8:38"},
+                        {t: "Account Onboarding — Part 1", d: "6:53"},
+                        {t: "Account Onboarding — Part 2", d: "3:06"},
+                        {t: "Lab: Manual Account Onboarding", d: "10:11"},
+                        {t: "Account Discovery — Part 1", d: "6:01"},
+                        {t: "Account Discovery — Part 2", d: "5:03"},
+                        {t: "Lab: Account Discovery", d: "10:05"}
+                    ] },
+                    { title: "Module 6: Session Management", lectures: [
+                        {t: "Session Management Introduction", d: "1:39"},
+                        {t: "Session Isolation", d: "2:52"},
+                        {t: "Plugins / Connectors", d: "7:22"},
+                        {t: "RDP Session", d: "4:50"},
+                        {t: "SSH Session", d: "2:49"},
+                        {t: "Lab: SSH Session", d: "5:03"},
+                        {t: "Workflows — Part 1", d: "8:01"},
+                        {t: "Workflows — Part 2", d: "3:24"},
+                        {t: "Workflows — Part 3", d: "1:41"},
+                        {t: "Workflows — Part 4", d: "3:27"},
+                        {t: "Lab: Workflows", d: "10:13"}
+                    ] },
+                    { title: "Module 7: Audit & Compliance", lectures: [
+                        {t: "Audit & Compliance Introduction", d: "2:11"},
+                        {t: "Session Recording", d: "3:30"},
+                        {t: "Lab: Session Recording", d: "6:14"},
+                        {t: "Session Audit", d: "3:30"},
+                        {t: "Session Monitoring", d: "3:11"},
+                        {t: "Reporting — Part 1", d: "4:37"},
+                        {t: "Reporting — Part 2", d: "8:40"}
+                    ] },
+                    { title: "Module 8: Risk & Alerting", lectures: [
+                        {t: "Risk & Alerting Introduction", d: "1:48"},
+                        {t: "SIEM Integration", d: "3:12"},
+                        {t: "Alerting", d: "4:57"},
+                        {t: "Risk Scoring", d: "4:28"},
+                        {t: "Automatic Remediation", d: "4:55"}
+                    ] }
                 ]
             },
             'entraid': {
                 title: 'Microsoft EntraID',
-                desc: 'Deep dive into Microsoft\'s cloud-based identity and access management service, formerly Azure AD.',
                 status: 'Available 1st Nov',
-                statusClass: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-                price: '$149',
-                lectures: '70+',
-                duration: '20+',
+                statusClass: 'bg-amber-50 text-amber-800 border-amber-200',
+                statusTextClass: 'text-amber-700',
+                statusIcon: 'fa-regular fa-calendar-days text-amber-500',
+                cardGradient: 'from-cyan-600 to-blue-700',
+                cardIcon: 'fa-brands fa-microsoft',
+                price: '₹ 4999 / $ 65',
+                lectures: '50+ lectures',
+                duration: '4.5+ hours of learning',
+                enrollLinks: { indian: 'https://rzp.io/rzp/entraid', international: 'https://www.paypal.com/ncp/payment/5XLMFGRG4CXG4' },
                 syllabus: [
-                    { title: "Preview Section: EntraID Fundamentals", lectures: [
-                        { title: "Evolution from Azure AD to EntraID", duration: "12:30" },
-                        { title: "Tenant Configuration Basics", duration: "25:00" },
-                        { title: "Managing Users and Groups", duration: "30:45" }
-                    ]},
-                    { title: "Preview Section: Authentication & Security", lectures: [
-                        { title: "MFA Setup and Best Practices", duration: "28:15" },
-                        { title: "Conditional Access Policies Deep Dive", duration: "45:20" },
-                        { title: "Passwordless Authentication Strategies", duration: "33:10" }
-                    ]}
+                    { title: "Module 1: Cloud Identity", lectures: [{t: "1.1 Azure AD to Entra", d: "12:00"}, {t: "1.2 Tenant Setup", d: "25:00"}] },
+                    { title: "Module 2: Conditional Access", lectures: [{t: "2.1 MFA Deployment", d: "28:00"}, {t: "2.2 Policy deep dive", d: "45:00"}] },
+                    { title: "Module 3: Application Management", lectures: [{t: "3.1 App Registration", d: "30:00"}, {t: "3.2 Enterprise Apps", d: "42:00"}] }
                 ]
             },
             'okta': {
                 title: 'Okta SAML 2.0',
-                desc: 'Learn to integrate, configure, and manage SAML 2.0 applications using Okta Single Sign-On (SSO).',
                 status: 'Available 1st Nov',
-                statusClass: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-                price: '$149',
-                lectures: '70+',
-                duration: '20+',
+                statusClass: 'bg-amber-50 text-amber-800 border-amber-200',
+                statusTextClass: 'text-amber-700',
+                statusIcon: 'fa-regular fa-calendar-days text-amber-500',
+                cardGradient: 'from-blue-500 to-indigo-800',
+                cardIcon: 'fa-solid fa-network-wired',
+                price: '₹ 4999 / $ 65',
+                lectures: '35+ lectures',
+                duration: '4+ hours of learning',
+                enrollLinks: { indian: 'https://rzp.io/rzp/okta-saml', international: 'https://www.paypal.com/ncp/payment/D4QM7J2M7JDCU' },
                 syllabus: [
-                    { title: "Preview Section: SAML & SSO Basics", lectures: [
-                        { title: "How SSO Works", duration: "15:00" },
-                        { title: "Understanding the SAML 2.0 Flow (SP-Init vs IdP-Init)", duration: "32:10" },
-                        { title: "Navigating the Okta Admin Console", duration: "20:45" }
-                    ]},
-                    { title: "Preview Section: Application Integration", lectures: [
-                        { title: "Configuring a Custom SAML App", duration: "40:20" },
-                        { title: "Attribute Mapping & Claims", duration: "28:15" },
-                        { title: "Troubleshooting SAML Assertions via Browser Extensions", duration: "35:00" }
-                    ]}
+                    { title: "Module 1: SSO Mechanics", lectures: [{t: "1.1 Federated Identity", d: "15:00"}, {t: "1.2 SAML Assertions", d: "32:00"}] },
+                    { title: "Module 2: Implementation", lectures: [{t: "2.1 Custom SAML App", d: "40:00"}, {t: "2.2 Troubleshooting", d: "35:00"}] },
+                    { title: "Module 3: Lifecycle Management", lectures: [{t: "3.1 Directory Integration", d: "25:00"}, {t: "3.2 JIT Provisioning", d: "48:00"}] }
                 ]
             }
         };
 
-        const mainView = document.getElementById('main-view');
-        const detailView = document.getElementById('course-details-view');
+        const vMain = document.getElementById('main-view');
+        const vDetail = document.getElementById('course-details-view');
 
-        // Render course details dynamically
-        function openCourse(courseId) {
-            const course = courseDatabase[courseId];
-            if(!course) return;
+        function renderCourseCards() {
+            const grid = document.getElementById('course-grid');
+            let html = '';
 
-            // Update Header Meta
-            document.getElementById('detail-title').innerText = course.title;
-            document.getElementById('detail-desc').innerText = course.desc;
-            document.getElementById('detail-price').innerText = course.price;
-            document.getElementById('detail-lectures').innerText = course.lectures;
-            document.getElementById('detail-duration').innerText = course.duration;
-            
-            const badge = document.getElementById('detail-badge');
-            badge.innerText = course.status;
-            badge.className = `inline-block mb-3 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase ${course.statusClass}`;
-
-            // Build Syllabus UI
-            const syllabusContainer = document.getElementById('syllabus-container');
-            syllabusContainer.innerHTML = ''; // Clear previous
-
-            course.syllabus.forEach((section, index) => {
-                const sectionTotalLectures = section.lectures.length;
-                
-                // Section Header
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = index !== 0 ? 'border-t border-gray-200' : '';
-                
-                const headerDiv = document.createElement('div');
-                headerDiv.className = 'bg-gray-50 p-4 flex justify-between items-center cursor-default';
-                headerDiv.innerHTML = `
-                    <h3 class="font-bold text-gray-900">${section.title}</h3>
-                    <span class="text-sm text-gray-500">${sectionTotalLectures} lectures</span>
-                `;
-                sectionDiv.appendChild(headerDiv);
-
-                // Section Lectures list
-                const ul = document.createElement('ul');
-                ul.className = 'divide-y divide-gray-100 bg-white';
-                
-                section.lectures.forEach(lecture => {
-                    const li = document.createElement('li');
-                    li.className = 'p-4 flex justify-between items-center hover:bg-gray-50 transition group';
-                    li.innerHTML = `
-                        <div class="flex items-center text-gray-700 group-hover:text-brand-600 transition">
-                            <i class="fa-solid fa-circle-play mr-3 text-brand-400 group-hover:text-brand-600"></i>
-                            <span class="font-medium text-sm md:text-base">${lecture.title}</span>
+            for (const [id, course] of Object.entries(courseData)) {
+                html += `
+                <div class="flex flex-col h-full bg-white rounded-2xl shadow-md hover:shadow-2xl border border-slate-200 overflow-hidden transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer group" onclick="openCourse('${id}')">
+                    <div class="h-48 shrink-0 bg-gradient-to-br ${course.cardGradient} p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 text-white opacity-10 text-9xl"><i class="${course.cardIcon}"></i></div>
+                        <div class="flex justify-end relative z-10">
+                            <span class="bg-white/95 backdrop-blur ${course.statusTextClass} text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                                <i class="${course.statusIcon} mr-1"></i> ${course.status}
+                            </span>
                         </div>
-                        <span class="text-sm text-gray-400 whitespace-nowrap ml-4">${lecture.duration}</span>
-                    `;
-                    ul.appendChild(li);
+                        <div class="text-white relative z-10">
+                            <i class="${course.cardIcon} text-4xl mb-2 group-hover:scale-110 transition-transform origin-left"></i>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col grow">
+                        <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-brand-600 transition-colors leading-tight">${course.title.split(':')[0]}</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-slate-600 font-medium">
+                                <i class="fa-solid fa-book-open w-6 text-brand-500"></i> ${course.lectures}
+                            </div>
+                            <div class="flex items-center text-slate-600 font-medium">
+                                <i class="fa-regular fa-clock w-6 text-brand-500"></i> ${course.duration}
+                            </div>
+                            <div class="flex items-center text-slate-600 font-medium">
+                                <i class="fa-solid fa-infinity w-6 text-brand-500"></i> Lifetime access
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-lg font-bold text-slate-700">${course.price}</span>
+                            <span class="text-brand-600 font-bold text-sm bg-brand-50 px-4 py-2 rounded-lg group-hover:bg-brand-600 group-hover:text-white transition-colors">View Course <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            grid.innerHTML = html;
+        }
+
+        // Initialize cards on load
+        renderCourseCards();
+
+        function toggleEnrollDropdown(e) {
+            if (e) e.stopPropagation();
+            const dropdown = document.getElementById('enroll-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('enroll-dropdown');
+            if (dropdown && !dropdown.classList.contains('hidden') && !e.target.closest('#enroll-dropdown-container')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        function openCourse(id) {
+            const data = courseData[id];
+            if(!data) return;
+
+            // Hide the dropdown by default when changing courses
+            const dropdown = document.getElementById('enroll-dropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+
+            document.getElementById('detail-title').innerText = data.title;
+            document.getElementById('detail-lectures').innerText = data.lectures;
+            document.getElementById('detail-duration').innerText = data.duration;
+            document.getElementById('detail-price').innerText = data.price;
+
+            // Assign specific links for the selected course
+            document.getElementById('enroll-indian').href = data.enrollLinks.indian;
+            document.getElementById('enroll-intl').href = data.enrollLinks.international;
+
+            const badge = document.getElementById('detail-badge');
+            badge.innerHTML = id.includes('sailpoint') || id.includes('cyberark') ?
+                `<i class="fa-solid fa-circle-check text-emerald-500 mr-2"></i> ${data.status}` :
+                `<i class="fa-regular fa-calendar-days text-amber-500 mr-2"></i> ${data.status}`;
+            badge.className = `inline-flex items-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider mb-5 shadow-sm border ${data.statusClass}`;
+
+            const container = document.getElementById('syllabus-container');
+            container.innerHTML = '';
+
+            // Generate distinct card for each module for clean layout
+            data.syllabus.forEach((mod) => {
+                let html = `
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
+                    <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                        <h3 class="font-black text-slate-800 text-lg">${mod.title}</h3>
+                    </div>
+                    <div class="px-2 py-2 grow">
+                        <ul class="divide-y divide-slate-100">`;
+                
+                mod.lectures.forEach((l) => {
+                    html += `
+                            <li class="px-4 py-3.5 flex justify-between items-start hover:bg-brand-50 rounded-lg transition-colors group">
+                                <span class="text-slate-700 font-medium text-sm pr-4 group-hover:text-brand-700 leading-snug">
+                                    <i class="fa-solid fa-circle-play text-slate-300 text-xs mr-2 mt-1 group-hover:text-brand-500"></i>${l.t}
+                                </span>
+                                <span class="text-slate-500 text-xs font-mono font-bold shrink-0 bg-slate-100 px-2.5 py-1 rounded">${l.d}</span>
+                            </li>`;
                 });
 
-                sectionDiv.appendChild(ul);
-                syllabusContainer.appendChild(sectionDiv);
+                html += `
+                        </ul>
+                    </div>
+                </div>`;
+                container.innerHTML += html;
             });
 
-            // Switch Views
-            mainView.classList.add('hidden');
-            detailView.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            vMain.classList.add('hidden');
+            vDetail.classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function showMainView() {
-            detailView.classList.add('hidden');
-            mainView.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            vDetail.classList.add('hidden');
+            vMain.classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
 </body>
