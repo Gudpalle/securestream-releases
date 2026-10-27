@@ -112,7 +112,7 @@
                 <!-- App Store Buttons -->
                 <div class="slide-up-text stagger-2 flex flex-col sm:flex-row justify-center items-center gap-4">
                     <!-- Mac OS -->
-                    <a href="https://github.com/Gudpalle/securestream-releases/releases/download/v0.1.6/upskillme_0.1.6_aarch64.dmg" target="_blank" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <a href="https://github.com/Gudpalle/securestream-releases/releases/latest" data-release-asset="macos" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         <i class="fa-brands fa-apple text-3xl mr-4"></i>
                         <div class="text-left">
                             <div class="text-[10px] uppercase tracking-widest opacity-80 leading-none mb-1.5 font-semibold">Download for</div>
@@ -120,11 +120,19 @@
                         </div>
                     </a>
                     <!-- Windows -->
-                    <a href="https://github.com/Gudpalle/securestream-releases/releases/download/v0.1.6/upskillme_0.1.6_x64-setup.exe" target="_blank" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <a href="https://github.com/Gudpalle/securestream-releases/releases/latest" data-release-asset="windows" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         <i class="fa-brands fa-windows text-2xl mr-4"></i>
                         <div class="text-left">
                             <div class="text-[10px] uppercase tracking-widest opacity-80 leading-none mb-1.5 font-semibold">Download for</div>
                             <div class="font-bold text-base leading-none">Windows OS</div>
+                        </div>
+                    </a>
+                    <!-- Linux -->
+                    <a href="https://github.com/Gudpalle/securestream-releases/releases/latest" data-release-asset="linux" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-full sm:w-64 px-6 py-4 rounded-xl text-white bg-orange-600 hover:bg-orange-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <i class="fa-brands fa-linux text-2xl mr-4"></i>
+                        <div class="text-left">
+                            <div class="text-[10px] uppercase tracking-widest opacity-80 leading-none mb-1.5 font-semibold">Download for</div>
+                            <div class="font-bold text-base leading-none">Linux OS (AppImage)</div>
                         </div>
                     </a>
                     <!-- Android -->
@@ -238,6 +246,38 @@
     </footer>
 
     <!-- Logic & Data -->
+    <script>
+        const latestReleaseApi = 'https://api.github.com/repos/Gudpalle/securestream-releases/releases/latest';
+        const releaseAssetPatterns = {
+            macos: /^upskillme_.*_aarch64\.dmg$/,
+            windows: /^upskillme_.*_x64-setup\.exe$/,
+            linux: /^upskillme_.*_amd64\.AppImage$/
+        };
+
+        fetch(latestReleaseApi, { headers: { Accept: 'application/vnd.github+json' } })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`GitHub returned ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((release) => {
+                for (const [platform, pattern] of Object.entries(releaseAssetPatterns)) {
+                    const asset = release.assets.find((item) => pattern.test(item.name));
+                    const downloadUrl = asset?.browser_download_url;
+                    if (downloadUrl) {
+                        const parsedUrl = new URL(downloadUrl);
+                        if (parsedUrl.protocol !== 'https:' || parsedUrl.hostname !== 'github.com') {
+                            continue;
+                        }
+                        document.querySelector(`[data-release-asset="${platform}"]`).href = downloadUrl;
+                    }
+                }
+            })
+            .catch((error) => {
+                console.warn('Unable to load the latest app download links; using the releases page.', error);
+            });
+    </script>
     <script>
         // Unique pricing is set per course
         const courseData = {
