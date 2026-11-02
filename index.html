@@ -51,6 +51,91 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
+        .diwali-ripple {
+            position: relative;
+            display: inline-flex;
+            width: 1.75rem;
+            height: 1.75rem;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+        }
+        .diwali-ripple::before,
+        .diwali-ripple::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(255, 255, 255, 0.75);
+            border-radius: 50%;
+            animation: diwaliRipple 2s ease-out infinite;
+            pointer-events: none;
+        }
+        .diwali-ripple::after { animation-delay: 1s; }
+        .diwali-ripple-icon { position: relative; z-index: 1; }
+        @keyframes diwaliRipple {
+            0% { opacity: 0.8; transform: scale(0.65); }
+            100% { opacity: 0; transform: scale(1.7); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .diwali-ripple::before,
+            .diwali-ripple::after { animation: none; }
+        }
+
+        .diwali-offer-dialog {
+            width: min(calc(100% - 2rem), 34rem);
+            max-width: none;
+            max-height: calc(100% - 2rem);
+            padding: 0;
+            overflow: visible;
+            border: 0;
+            border-radius: 1.75rem;
+            background: transparent;
+            color: inherit;
+        }
+        .diwali-offer-dialog::backdrop {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(6px);
+        }
+        .diwali-offer-dialog[open] { animation: diwaliOfferEntrance 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .diwali-offer-content {
+            position: relative;
+            z-index: 1;
+            max-height: calc(100vh - 2rem);
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: inherit;
+            background: linear-gradient(145deg, #fff7ed 0%, #ffffff 48%, #fef3c7 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(15, 23, 42, 0.4);
+        }
+        .diwali-confetti {
+            position: fixed;
+            z-index: 2;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .diwali-confetti-piece {
+            position: absolute;
+            top: -1rem;
+            border-radius: 2px;
+            animation: diwaliConfettiFall 3.2s cubic-bezier(0.2, 0.65, 0.35, 1) both;
+        }
+        @keyframes diwaliOfferEntrance {
+            from { opacity: 0; transform: translateY(1.25rem) scale(0.92); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes diwaliConfettiFall {
+            0% { opacity: 0; transform: translate3d(0, -5vh, 0) rotate(0deg); }
+            10% { opacity: 1; }
+            100% { opacity: 0.9; transform: translate3d(var(--confetti-drift), 110vh, 0) rotate(var(--confetti-rotation)); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .diwali-offer-dialog[open] { animation: none; }
+            .diwali-confetti { display: none; }
+        }
+
         /* Staggered animation delays for syllabus items */
         .stagger-1 { animation-delay: 0.1s; }
         .stagger-2 { animation-delay: 0.2s; }
@@ -66,9 +151,9 @@
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
     <!-- 1. Top Announcement Banner -->
-    <div class="bg-gradient-to-r from-brand-700 to-indigo-700 text-white text-center py-3 px-4 text-sm font-semibold shadow-md relative z-50">
-        <span class="mr-2 text-lg">🚀</span> <span class="opacity-90">Sailpoint Help is now</span> <span class="text-white font-extrabold ml-1 tracking-wide">UpskillMe</span>
-    </div>
+    <button type="button" onclick="openDiwaliOffer()" aria-haspopup="dialog" aria-controls="diwali-offer-dialog" class="w-full border-0 cursor-pointer bg-gradient-to-r from-brand-700 to-indigo-700 text-white text-center py-3 px-4 text-sm font-semibold shadow-md relative z-50 font-sans focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300">
+        <span class="diwali-ripple mr-2" aria-hidden="true"><span class="diwali-ripple-icon text-lg">🪔</span></span> <span class="text-white font-extrabold tracking-wide">Diwali Sale!</span> <span class="opacity-90">Flat 60% discount on all courses.</span>
+    </button>
 
     <!-- 2. Header (Logo Only & YouTube) -->
     <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40">
@@ -90,6 +175,26 @@
             </div>
         </div>
     </nav>
+
+    <dialog id="diwali-offer-dialog" class="diwali-offer-dialog" aria-labelledby="diwali-offer-title" aria-describedby="diwali-offer-description">
+        <div id="diwali-confetti" class="diwali-confetti" aria-hidden="true"></div>
+        <div class="diwali-offer-content">
+            <button type="button" onclick="closeDiwaliOffer()" aria-label="Close Diwali offer" class="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-2xl text-slate-500 shadow-sm transition hover:bg-white hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-600">
+                &times;
+            </button>
+            <div class="mb-4 text-3xl" aria-hidden="true">🪔 ✨ 🪔</div>
+            <p class="mb-2 text-sm font-black uppercase tracking-[0.2em] text-orange-700">A little Diwali sparkle</p>
+            <h2 id="diwali-offer-title" class="mb-1 text-5xl font-black tracking-tight text-slate-900 sm:text-6xl">60% <span class="text-orange-600">OFF</span></h2>
+            <p class="mb-5 text-lg font-extrabold text-slate-700">Flat 60% discount on all courses!</p>
+            <p id="diwali-offer-description" class="mx-auto mb-7 max-w-sm text-sm leading-relaxed text-slate-600">
+                Celebrate Diwali by investing in your next big skill. Explore our courses and find your next learning adventure.
+            </p>
+            <button type="button" autofocus onclick="closeDiwaliOffer(true)" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-600 px-6 py-4 font-extrabold text-white shadow-lg shadow-orange-200 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 sm:w-auto">
+                Explore all courses <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+            <p class="mt-4 text-xs font-medium text-slate-500">A brighter future starts with one new skill.</p>
+        </div>
+    </dialog>
 
     <!-- MAIN VIEW -->
     <div id="main-view" class="fade-in flex-grow flex flex-col">
@@ -508,13 +613,149 @@
                 cardGradient: 'from-cyan-600 to-blue-700',
                 cardIcon: 'fa-brands fa-microsoft',
                 price: '₹ 4999 / $ 65',
-                lectures: '50+ lectures',
-                duration: '4.5+ hours of learning',
+                lectures: '107 lectures',
+                duration: '8+ hours of learning',
                 enrollLinks: { indian: 'https://rzp.io/rzp/entraid', international: 'https://www.paypal.com/ncp/payment/5XLMFGRG4CXG4' },
                 syllabus: [
-                    { title: "Module 1: Cloud Identity", lectures: [{t: "1.1 Azure AD to Entra", d: "12:00"}, {t: "1.2 Tenant Setup", d: "25:00"}] },
-                    { title: "Module 2: Conditional Access", lectures: [{t: "2.1 MFA Deployment", d: "28:00"}, {t: "2.2 Policy deep dive", d: "45:00"}] },
-                    { title: "Module 3: Application Management", lectures: [{t: "3.1 App Registration", d: "30:00"}, {t: "3.2 Enterprise Apps", d: "42:00"}] }
+                    { title: "Module 1: Basics - Azure", lectures: [
+                        {t: "Cloud Computing Properties", d: "3:00"},
+                        {t: "Cloud Computing Types", d: "2:12"},
+                        {t: "Azure Global Backbone", d: "1:54"},
+                        {t: "Shared Responsibility Model", d: "4:30"},
+                        {t: "Azure Resource Hierarchy", d: "3:13"},
+                        {t: "Azure Subscription Types", d: "2:03"},
+                        {t: "Entra ID Tenants and Azure Subscriptions", d: "1:39"}
+                    ]},
+                    { title: "Module 2: Basics - Identity", lectures: [
+                        {t: "Authorization", d: "1:34"},
+                        {t: "Authentication", d: "1:38"},
+                        {t: "Identity Providers", d: "2:32"},
+                        {t: "Directory Services", d: "1:50"},
+                        {t: "Federation", d: "1:48"}
+                    ]},
+                    { title: "Module 3: Basics - Microsoft Security", lectures: [
+                        {t: "Zero Trust", d: "3:40"},
+                        {t: "The Microsoft Security Cosmos", d: "4:35"},
+                        {t: "Defending Across Attack Chains", d: "3:09"}
+                    ]},
+                    { title: "Module 4: Microsoft Entra & Entra ID", lectures: [
+                        {t: "Microsoft Entra", d: "17:00"},
+                        {t: "Microsoft Entra ID", d: "9:27"}
+                    ]},
+                    { title: "Module 5: Identities", lectures: [
+                        {t: "User Identities", d: "2:44"},
+                        {t: "Demo: User Identities", d: "5:55"},
+                        {t: "Managed Identities", d: "7:05"},
+                        {t: "Demo: Managed Identities", d: "9:20"},
+                        {t: "External Identities", d: "6:55"},
+                        {t: "Application Identities & Application Registrations", d: "2:41"}
+                    ]},
+                    { title: "Module 6: Groups & Administrative Units", lectures: [
+                        {t: "Groups", d: "9:54"},
+                        {t: "Demo: Groups", d: "1:54"},
+                        {t: "Administrative Units", d: "4:41"},
+                        {t: "Demo: Administrative Units", d: "3:36"}
+                    ]},
+                    { title: "Module 7: Password Security", lectures: [
+                        {t: "Attacks on Passwords", d: "5:13"},
+                        {t: "Password Protection", d: "3:34"},
+                        {t: "Demo: Password Protection", d: "3:37"},
+                        {t: "Self-Service Password Reset (SSPR)", d: "4:35"},
+                        {t: "Demo: SSPR", d: "2:59"}
+                    ]},
+                    { title: "Module 8: Authentication (AuthN)", lectures: [
+                        {t: "Authentication Methods", d: "6:20"},
+                        {t: "Multi-Factor Authentication (MFA)", d: "9:44"},
+                        {t: "Demo: MFA", d: "3:40"},
+                        {t: "Passwordless Authentication", d: "3:54"},
+                        {t: "Demo: Passwordless Authentication", d: "3:30"},
+                        {t: "Single-Sign-on (SSO)", d: "2:01"}
+                    ]},
+                    { title: "Module 9: Authorization (AuthZ)", lectures: [
+                        {t: "Entra ID Roles", d: "3:56"},
+                        {t: "Demo: Entra ID Roles", d: "4:30"},
+                        {t: "Azure Role-Based-Access-Control (RBAC)", d: "12:31"},
+                        {t: "Configure Azure RBAC", d: "4:17"},
+                        {t: "Create a custom role with Azure RBAC", d: "4:17"},
+                        {t: "Assign Azure roles", d: "3:44"},
+                        {t: "Check Azure role permissions", d: "2:30"},
+                        {t: "Azure RBAC vs. Entra ID Roles", d: "4:05"},
+                        {t: "Access Reviews", d: "5:12"},
+                        {t: "Conditional Access", d: "6:37"},
+                        {t: "Demo: Conditional Access", d: "14:42"}
+                    ]},
+                    { title: "Module 10: Hybrid Identity", lectures: [
+                        {t: "Demo: Hybrid Identity Setup", d: "7:03"},
+                        {t: "Demo: Create Custom Domain", d: "9:10"},
+                        {t: "Demo: Install Active Directory", d: "6:55"},
+                        {t: "Entra Connect", d: "5:58"},
+                        {t: "Demo: Entra Connect Sync", d: "9:52"},
+                        {t: "Demo: Verify Entra Connect Sync", d: "2:11"},
+                        {t: "Hybrid Authentication", d: "2:41"},
+                        {t: "Entra Domain Services", d: "3:25"}
+                    ]},
+                    { title: "Module 11: Privileged Identity Management", lectures: [
+                        {t: "Privileged Identity Management (PIM)", d: "6:34"},
+                        {t: "Demo: Configure PIM", d: "9:48"}
+                    ]},
+                    { title: "Module 12: Microsoft Entra Services", lectures: [
+                        {t: "Entra Verified ID", d: "3:05"},
+                        {t: "Entra ID Governance", d: "3:39"},
+                        {t: "Entra ID Entitlement Management", d: "3:24"},
+                        {t: "Entra Permissions Management (EPM)", d: "9:41"}
+                    ]},
+                    { title: "Module 13: Identity Attacks & Monitoring", lectures: [
+                        {t: "NTLM", d: "5:50"},
+                        {t: "Pass-the-Hash Attacks", d: "2:44"},
+                        {t: "Kerberos", d: "4:34"},
+                        {t: "Pass-The-Ticket Attacks", d: "1:45"},
+                        {t: "Brute Force Attacks", d: "3:07"},
+                        {t: "Remote Code Execution Attacks", d: "1:47"},
+                        {t: "Entra ID Protection", d: "14:02"},
+                        {t: "Demo: Entra ID Protection", d: "6:12"},
+                        {t: "Microsoft Defender for Identity", d: "4:50"}
+                    ]},
+                    { title: "Module 14: Entra ID Plugin for Microsoft Security Copilot", lectures: [
+                        {t: "Name Change", d: "0:07"},
+                        {t: "What is Security Copilot?", d: "5:22"},
+                        {t: "From Prompt to Response", d: "2:05"},
+                        {t: "Architecture", d: "5:41"},
+                        {t: "Extending Copilot with Plugins & more", d: "3:41"},
+                        {t: "Privacy Implications", d: "2:11"},
+                        {t: "Authentication & RBAC", d: "6:09"},
+                        {t: "Standalone vs. Embedded Experience", d: "1:21"},
+                        {t: "Pricing", d: "2:23"},
+                        {t: "IMPORTANT - DO NOT SKIP", d: "0:28"},
+                        {t: "Onboarding Requirements", d: "1:29"},
+                        {t: "Demo: Create Compute Capacities", d: "3:45"},
+                        {t: "Demo: Setup Copilot for Security", d: "14:58"},
+                        {t: "Creating Effective Prompts", d: "12:04"},
+                        {t: "Demo: Entra ID 1", d: "9:24"}
+                    ]},
+                    { title: "Module 15: Entra ID Security Monitoring with Defender XDR", lectures: [
+                        {t: "What is Defender XDR?", d: "4:48"},
+                        {t: "Demo: Configure RBAC", d: "1:26"},
+                        {t: "Entra ID Protection in Defender XDR", d: "2:01"}
+                    ]},
+                    { title: "Module 16: Entra ID Security Monitoring with Microsoft Sentinel", lectures: [
+                        {t: "Deployment Prerequisites", d: "1:05"},
+                        {t: "Demo: Create an Azure Resource Group for Sentinel", d: "1:14"},
+                        {t: "Demo: Create a Log Analytics Workspace", d: "1:39"},
+                        {t: "Demo: Create a Sentinel Workspace", d: "1:13"},
+                        {t: "Sentinel RBAC", d: "2:10"},
+                        {t: "Demo: Azure RBAC for Sentinel", d: "2:47"},
+                        {t: "Typical data sources for a SIEM", d: "3:03"},
+                        {t: "Demo: Content Hub", d: "4:49"},
+                        {t: "Demo: Ingesting Entra ID into Sentinel", d: "2:13"},
+                        {t: "Demo: Verify Entra ID Ingestion", d: "1:31"},
+                        {t: "Sentinel Workflow", d: "3:04"},
+                        {t: "Analytic Rules", d: "1:39"},
+                        {t: "Demo: Analytic Rules", d: "2:18"},
+                        {t: "Scheduled Analytic Rules", d: "1:13"},
+                        {t: "Demo: Scheduled Analytic Rules - Entra ID", d: "5:51"},
+                        {t: "UEBA in Sentinel", d: "3:15"},
+                        {t: "Demo: UEBA in Sentinel", d: "7:10"}
+                    ]}
                 ]
             },
             'okta': {
@@ -539,6 +780,53 @@
 
         const vMain = document.getElementById('main-view');
         const vDetail = document.getElementById('course-details-view');
+        const diwaliOfferDialog = document.getElementById('diwali-offer-dialog');
+        let diwaliConfettiTimeout;
+
+        function launchDiwaliConfetti() {
+            const confetti = document.getElementById('diwali-confetti');
+            confetti.replaceChildren();
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const colors = ['#f97316', '#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7', '#ffffff'];
+            for (let index = 0; index < 70; index += 1) {
+                const piece = document.createElement('span');
+                piece.className = 'diwali-confetti-piece';
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.width = `${6 + Math.random() * 7}px`;
+                piece.style.height = `${10 + Math.random() * 10}px`;
+                piece.style.backgroundColor = colors[index % colors.length];
+                piece.style.setProperty('--confetti-drift', `${Math.random() * 240 - 120}px`);
+                piece.style.setProperty('--confetti-rotation', `${Math.random() * 1080 - 540}deg`);
+                piece.style.animationDelay = `${Math.random() * 0.55}s`;
+                confetti.appendChild(piece);
+            }
+
+            window.clearTimeout(diwaliConfettiTimeout);
+            diwaliConfettiTimeout = window.setTimeout(() => confetti.replaceChildren(), 4000);
+        }
+
+        function openDiwaliOffer() {
+            if (diwaliOfferDialog.open) return;
+            diwaliOfferDialog.showModal();
+            launchDiwaliConfetti();
+        }
+
+        function closeDiwaliOffer(showCourses = false) {
+            if (diwaliOfferDialog.open) diwaliOfferDialog.close();
+            if (showCourses) {
+                document.getElementById('course-grid').scrollIntoView({
+                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+                });
+            }
+        }
+
+        diwaliOfferDialog.addEventListener('click', (event) => {
+            if (event.target === diwaliOfferDialog) closeDiwaliOffer();
+        });
+
+        window.setTimeout(openDiwaliOffer, 900);
 
         function renderCourseCards() {
             const grid = document.getElementById('course-grid');
